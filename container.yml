@@ -1,0 +1,10 @@
+version: "1"
+services:
+  mongo:
+    image: mongo
+    #image: ubuntu:14.04
+    ports:
+      - "28001:27017"
+    command: ['mongod', '--setParameter', 'authenticationMechanisms=MONGODB-CR', '--replSet', 'rs0']
+
+registries: {}
