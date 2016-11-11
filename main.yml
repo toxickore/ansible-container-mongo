@@ -13,5 +13,19 @@
   
   - raw: (which python && which aptitude) || apt-get install -y python python-apt aptitude
   
-  - name: Create data directory for mongoDB
+  - name: Create data directory for mongoDB /data/db
     file: path=/data/db
+
+  - name: Create temp primary.js script
+    raw: echo "cfg = rs.conf()\n
+         cfg.members[0].priority = 0.5\n
+         cfg.members[1].priority = 0.5\n
+         cfg.members[2].priority = 1\n
+         cfg.members[3].priority = 0.4\n
+         rs.reconfig(cfg)" > /tmp/primary.js
+
+#- hosts: primary
+#  gather_facts: false
+#
+#  tasks:
+#  - raw: echo "test" > /tmp/test.asc

@@ -1,9 +1,15 @@
+defaults:
+  AUTH_MECH: MONGODB-CR
+  REPL_SET_NAME: rs0
+  EXPOSED_PORT: 28001
+  INTERNAL_PORT: 27017
+
 version: "1"
 services:
   mongo:
     image: mongo
     ports:
-      - "28001:27017"
-    command: ['mongod', '--setParameter', 'authenticationMechanisms=MONGODB-CR', '--replSet', 'rs0']
+      - "{{28001}}:{{27017}}"
+    command: ['mongod', '--setParameter', 'authenticationMechanisms={{AUTH_MECH}}', '--replSet', '{{REPL_SET_NAME}}']
 
 registries: {}
